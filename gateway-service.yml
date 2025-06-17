@@ -1,0 +1,49 @@
+server.port: 8080
+server.error.include-message: always
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: backlog-service
+          uri: lb://backlog-service
+          predicates:
+            - Path=/api/v1/epics/**
+            - Path=/api/v1/sprints/**
+            - Path=/api/v1/user-stories/**
+        - id: iam-service
+          uri: lb://iam-service
+          predicates:
+            - Path=/api/v1/authentication/**
+            - Path=/api/v1/roles/**
+            - Path=/api/v1/users/**
+        - id: members-service
+          uri: lb://members-service
+          predicates:
+            - Path=/api/v1/members/**
+        - id: meeting-service
+          uri: lb://meeting-service
+          predicates:
+            - Path=/api/v1/meetings/**
+            - Path=/api/v1/recordings/**
+        - id: issues-service
+          uri: lb://issues-service
+          predicates:
+            - Path=/api/v1/issues/**
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
+      initialInstanceInfoReplicationIntervalSeconds: 5
+      registryFetchIntervalSeconds: 5
+      instance:
+      leaseRenewalIntervalInSeconds: 5
+      leaseExpirationDurationInSeconds: 5
+  instance:
+    hostname: localhost
