@@ -1,4 +1,4 @@
-server.port: 8080
+Lo tengo asi: server.port: 8080
 server.error.include-message: always
 
 spring:
@@ -8,31 +8,34 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: backlog-service
-          uri: lb://backlog-service
+        - id: appointment-service
+          uri: lb://appointment-service
           predicates:
-            - Path=/api/v1/epics/**
-            - Path=/api/v1/sprints/**
-            - Path=/api/v1/user-stories/**
+            - Path=/api/v1/appointments/**
+            - Path=/api/v1/available_dates/**
+            - Path=/api/v1/reviews/**
         - id: iam-service
           uri: lb://iam-service
           predicates:
             - Path=/api/v1/authentication/**
             - Path=/api/v1/roles/**
             - Path=/api/v1/users/**
-        - id: members-service
-          uri: lb://members-service
+        - id: management-service
+          uri: lb://management-service
           predicates:
-            - Path=/api/v1/members/**
-        - id: meeting-service
-          uri: lb://meeting-service
+            - Path=/api/v1/animals/**
+            - Path=/api/v1/enclosures/**
+        - id: post-service
+          uri: lb://post-service
           predicates:
-            - Path=/api/v1/meetings/**
-            - Path=/api/v1/recordings/**
-        - id: issues-service
-          uri: lb://issues-service
+            - Path=/api/v1/posts/**
+        - id: profile-service
+          uri: lb://profile-service
           predicates:
-            - Path=/api/v1/issues/**
+            - Path=/api/v1/advisors/**
+            - Path=/api/v1/farmers/**
+            - Path=/api/v1/notifications/**
+            - Path=/api/v1/profiles/**
 
 eureka:
   client:
@@ -40,11 +43,10 @@ eureka:
     register-with-eureka: true
     serviceUrl:
       defaultZone: http://eureka-server:8761/eureka/
-    initialInstanceInfoReplicationIntervalSeconds: 5
-    registryFetchIntervalSeconds: 5
-
+      initialInstanceInfoReplicationIntervalSeconds: 5
+      registryFetchIntervalSeconds: 5
+      instance:
+      leaseRenewalIntervalInSeconds: 5
+      leaseExpirationDurationInSeconds: 5
   instance:
     hostname: localhost
-    leaseRenewalIntervalInSeconds: 5
-    leaseExpirationDurationInSeconds: 5
-
