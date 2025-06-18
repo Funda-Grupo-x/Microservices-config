@@ -15,7 +15,7 @@ spring:
             - Path=/api/v1/sprints/**
             - Path=/api/v1/user-stories/**
         - id: iam-service
-          uri: lb://IAM-SERVICE
+          uri: lb://iam-service
           predicates:
             - Path=/api/v1/authentication/**
             - Path=/api/v1/roles/**
