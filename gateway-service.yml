@@ -52,4 +52,9 @@ management:
   endpoints:
     web:
       exposure:
-        include: gateway, routes
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  security:
+    enabled: false
