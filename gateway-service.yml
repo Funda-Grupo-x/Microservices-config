@@ -47,3 +47,9 @@ eureka:
       leaseExpirationDurationInSeconds: 5
   instance:
     hostname: localhost
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway, routes
