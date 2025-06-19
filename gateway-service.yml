@@ -8,34 +8,31 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: appointment-service
-          uri: lb://appointment-service
+        - id: backlog-service
+          uri: lb://backlog-service
           predicates:
-            - Path=/api/v1/appointments/**
-            - Path=/api/v1/available_dates/**
-            - Path=/api/v1/reviews/**
+            - Path=/api/v1/epics/**
+            - Path=/api/v1/sprints/**
+            - Path=/api/v1/user-stories/**
         - id: iam-service
           uri: lb://iam-service
           predicates:
             - Path=/api/v1/authentication/**
             - Path=/api/v1/roles/**
             - Path=/api/v1/users/**
-        - id: management-service
-          uri: lb://management-service
+        - id: members-service
+          uri: lb://members-service
           predicates:
-            - Path=/api/v1/animals/**
-            - Path=/api/v1/enclosures/**
-        - id: post-service
-          uri: lb://post-service
+            - Path=/api/v1/members/**
+        - id: meeting-service
+          uri: lb://meeting-service
           predicates:
-            - Path=/api/v1/posts/**
-        - id: profile-service
-          uri: lb://profile-service
+            - Path=/api/v1/meetings/**
+            - Path=/api/v1/recordings/**
+        - id: issues-service
+          uri: lb://issues-service
           predicates:
-            - Path=/api/v1/advisors/**
-            - Path=/api/v1/farmers/**
-            - Path=/api/v1/notifications/**
-            - Path=/api/v1/profiles/**
+            - Path=/api/v1/issues/**
 
 eureka:
   client:
